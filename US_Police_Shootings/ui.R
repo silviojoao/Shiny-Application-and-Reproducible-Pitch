@@ -20,7 +20,7 @@ shootings$date <- ymd(shootings$date)
 shinyUI(fluidPage(
 
     # Application title
-    titlePanel("US Police Shootings"),
+    titlePanel("US Police Fatal Shootings"),
 
     # Sidebar with a slider input for number of bins
     sidebarLayout(
@@ -44,7 +44,35 @@ shinyUI(fluidPage(
 
         # Show a plot of the generated distribution
         mainPanel(
-            leafletOutput('plot')
+            tabsetPanel(type='tabs',
+                    tabPanel('Plot', br(), leafletOutput('plot')),
+                    tabPanel('Documentation', br(), 
+                             h1('About the Project'),
+                             p(style="text-align: justify;",'This project is for Developing Data Products course wich is
+                               part of Data Science Specialization in Coursera. In the recent killings,
+                               a hot topic came into being, "Racism". So I chose to gather some data
+                               to take out some insights and analyze the story around racism in US in a
+                               more "geographic way".'),
+                             p('The application include the following:'),
+
+                             p(strong('1.'), 'Input Data describe below;'),
+                             p(strong('2.'), 'Operations on the ui input in sever.R;'),
+                             p(strong('3.'), 'Reactive output plot displayed as a result of server calculations;'),
+                             p(strong('4.'), 'Documentation so that a novice user could use your application.'),
+                             p("So you can choose a time period, the state wich it occurred, the individual's race and
+                               the Leaflet maps will display a marker in the city or county center where the event occourred."),
+                             h1('The Data'),
+                             p(style='text-align: justify;',' The data is available in', a(href='https://github.com/washingtonpost/data-police-shootings',
+                                                                                           'Washington Post Repo'), 'where you find more details about the
+                               variables. The geographic including latitude and longitude information was extracted from', a(href='https://simplemaps.com/data/us-cities',
+                                                                                                                 'Simple Maps Database'),
+                               'comparing the cities in both datasets it was possible add the lat/long variable in the original dataset,
+                               the R script used is available on my', a(href='https://github.com/silviojoao/Shiny-Application-and-Reproducible-Pitch', 'Developing Data Application Repo'),
+                               "Let's take a look at a summary of our data:"),
+                             verbatimTextOutput('sum')
+                             
+                             )
+            )
         )
     )
 ))

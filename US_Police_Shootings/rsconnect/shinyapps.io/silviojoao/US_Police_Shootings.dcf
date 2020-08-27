@@ -5,8 +5,8 @@ account: silviojoao
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 2716192
-bundleId: 3564751
+bundleId: 3565247
 url: https://silviojoao.shinyapps.io/US_Police_Shootings/
-when: 1598554527.26248
+when: 1598564818.66214
 asMultiple: FALSE
 asStatic: FALSE

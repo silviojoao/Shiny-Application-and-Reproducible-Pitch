@@ -20,6 +20,10 @@ shootings$date <- ymd(shootings$date)
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
     
+    output$sum <- renderPrint({
+        summary(shootings[,-c(1,2,13,14,15,16)])
+        })
+    
     output$dates <- renderUI({
         datemax <- max(shootings$date)
         datemin <- min(shootings$date)
@@ -57,7 +61,7 @@ shinyServer(function(input, output) {
         leaflet() %>% addTiles() %>% addMarkers(lat=Data$lat, lng=Data$lng, clusterOptions = markerClusterOptions(),
                                                 popup = paste(paste0(Data$name,', ',Data$age), paste('Armed:', Data$armed), 
                                                               paste('Race:', Data$race),paste('Sign of Mental Illness: ', Data$signs_of_mental_illness)
-                                                              ,Data$date,sep='<br>'))
+                                                              ,paste0(Data$city,', ',Data$state, ', ',Data$date),sep='<br>'))
         
     })
     
